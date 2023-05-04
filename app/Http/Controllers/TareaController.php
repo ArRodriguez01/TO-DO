@@ -52,7 +52,7 @@ class TareaController extends Controller
     $tarea->save();
 
     // Redireccionar a la página de inicio o a otra página
-    return redirect('/articulos');
+    return redirect('/tarea');
 }
 
     /**
@@ -74,16 +74,30 @@ class TareaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tarea $tarea)
+    public function update(Request $request, $id)
     {
-        //
+    $tarea = Tarea::find($id);
+
+    $tarea->titulo = $request->input('titulo');
+    $tarea->contenido = $request->input('contenido');
+
+    $tarea->save();
+
+    $tareas = Tarea::all();
+
+    return view('tareas',compact('tarea'));
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tarea $tarea)
+    public function destroy($id)
     {
-        //
+        $tarea = Tarea::find($id);
+        if ($tarea) {
+            $tarea->delete();
+        }
+        return redirect()->route('tarea.index');
     }
 }
