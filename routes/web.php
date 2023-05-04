@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controller\TareaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [App\Http\Controllers\LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/tarea/store', [TareaController::class, 'store'])->name('tarea.store');
+Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.index');
 
-Route::post('/login', [App\Http\Controllers\LoginController::class, 'login']);
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-    })->name('dashboard');
-});
