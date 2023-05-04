@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TareaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::get('/', function () {
 
 Route::get('/register',[RegisterController::class,'index'])->name('register');
 Route::post('/register',[RegisterController::class,'create']);
+
+Route::get('/tarea/store', [TareaController::class, 'store'])->name('tarea.store');
+Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.index');
