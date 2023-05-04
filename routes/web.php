@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controller\TareaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/tarea/store', [TareaController::class, 'store'])->name('tarea.store');
+Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.index');
+
