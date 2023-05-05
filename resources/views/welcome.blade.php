@@ -17,5 +17,6 @@
     </head>
     <body class="antialiased">
         <a href="{{route('register')}}">REGISTER</a>
+        <a href="{{route('login')}}">LOGIN</a>
     </body>
 </html>

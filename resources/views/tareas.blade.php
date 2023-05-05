@@ -41,7 +41,10 @@
                         <div >{{ $item->titulo }}</div><br>
                         <div >{{ $item->contenido }}</div><br><br>
                         <button><a href="{{ route('tarea.edit', $item->id) }}" class="btn btn-primary">Editar</a></button>
-
+                        <form action="{{ route('tarea.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Eliminar</button>
                     </div>
                     <br><br>
                 @endforeach

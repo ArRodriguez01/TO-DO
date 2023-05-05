@@ -20,7 +20,7 @@ class LoginController extends Controller
 
         if (auth()->attempt($credentials)) {
 
-            return redirect()->route('dashboard');
+            return redirect(route('tarea.index'));
         }
 
         return back()->withErrors([

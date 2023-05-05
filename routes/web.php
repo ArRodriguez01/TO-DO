@@ -19,12 +19,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', [App\Http\Controllers\LoginController::class, 'showLoginForm'])->name('login');
+
+Route::post('/login', [App\Http\Controllers\LoginController::class, 'login']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/tarea', function () {
+    })->name('tareas');
+});
+
+
 Route::get('/register',[RegisterController::class,'index'])->name('register');
 Route::post('/register',[RegisterController::class,'create']);
 
 Route::get('/tarea/store', [TareaController::class, 'store'])->name('tarea.store');
 Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.index');
 
-Route::get('/tarea/{id}', [TareaController::class, 'destroy'])->name('tarea.destroy');
-Route::get('/tarea/{id}/update', [TareaController::class, 'update'])->name('tarea.update');
+Route::delete('/tarea/{id}', [TareaController::class, 'destroy'])->name('tarea.destroy');
+Route::put('/tarea/{id}/update', [TareaController::class, 'update'])->name('tarea.update');
 Route::get('/tarea/{id}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
