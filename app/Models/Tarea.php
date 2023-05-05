@@ -12,7 +12,5 @@ class Tarea extends Model
     protected $fillable = [
         'titulo',
         'contenido',
-        'user_id',
-        'user_name',
     ];
 }

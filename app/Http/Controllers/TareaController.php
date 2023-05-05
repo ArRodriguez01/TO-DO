@@ -31,28 +31,16 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-    $user = $request->user();
 
-    // Obtener los datos del formulario
     $titulo = $request->input('titulo');
     $contenido = $request->input('contenido');
-    $userid = $user->id;
-    $username = $user->name;
 
-    // Crear una nueva instancia del modelo Articulo con los datos del formulario
     $tarea = new Tarea;
     $tarea->titulo = $titulo;
     $tarea->contenido = $contenido;
-    $tarea->user_id = $userid;
-    $tarea->user_name = $username;
-
-
-
-    // Guardar el artículo en la base de datos
     $tarea->save();
 
-    // Redireccionar a la página de inicio o a otra página
-    return redirect('/articulos');
+    return redirect('/tarea');
 }
 
     /**
@@ -66,24 +54,39 @@ class TareaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tarea $tarea)
+    public function edit($id)
     {
-        //
+        $tarea = Tarea::find($id);
+        return view('edit', compact('tarea'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tarea $tarea)
+    public function update(Request $request, $id)
     {
-        //
+    $tareas = Tarea::find($id);
+
+    $tareas->titulo = $request->input('titulo');
+    $tareas->contenido = $request->input('contenido');
+
+    $tareas->save();
+
+    $tarea = Tarea::all();
+
+    return view('tareas',compact('tarea'));
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tarea $tarea)
+    public function destroy($id)
     {
-        //
+        $tarea = Tarea::find($id);
+        if ($tarea) {
+            $tarea->delete();
+        }
+        return redirect()->route('tarea.index');
     }
 }

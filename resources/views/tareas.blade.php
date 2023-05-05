@@ -19,18 +19,18 @@
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
             <form action="{{ route('tarea.store') }}" method="GET">
                 @csrf
-                <h1">Publicar Tareas</h1>
+                <h1>Publicar Tareas</h1>
                 <div >
                     <label for="titulo" >Título:</label>
-                    <input type="text" name="titulo" id="titulo" ">
+                    <input type="text" name="titulo" id="titulo">
 
                 </div>
                 <div >
-                    <label for="contenido" >Contenido:</label>
+                    <label for="contenido" >Contenido:</label><br>
                     <textarea name="contenido" id="contenido" ></textarea>
 
                 </div>
-                <button>{{ __('Publicar') }}</button>
+                <button type="submit">Publicar</button>
             </form>
         </div>
         <div >
@@ -38,9 +38,9 @@
                 @foreach ($tarea as $item)
                     <div >
 
-                        <div >{{ $item->titulo }}</div>
+                        <div >{{ $item->titulo }}</div><br>
                         <div >{{ $item->contenido }}</div><br><br>
-
+                        <button><a href="{{ route('tarea.edit', $item->id) }}" class="btn btn-primary">Editar</a></button>
 
                     </div>
                     <br><br>
