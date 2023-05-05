@@ -31,27 +31,15 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-    $user = $request->user();
 
-    // Obtener los datos del formulario
     $titulo = $request->input('titulo');
     $contenido = $request->input('contenido');
-    $userid = $user->id;
-    $username = $user->name;
 
-    // Crear una nueva instancia del modelo Articulo con los datos del formulario
     $tarea = new Tarea;
     $tarea->titulo = $titulo;
     $tarea->contenido = $contenido;
-    $tarea->user_id = $userid;
-    $tarea->user_name = $username;
-
-
-
-    // Guardar el artículo en la base de datos
     $tarea->save();
 
-    // Redireccionar a la página de inicio o a otra página
     return redirect('/tarea');
 }
 
@@ -66,9 +54,10 @@ class TareaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tarea $tarea)
+    public function edit($id)
     {
-        //
+        $tarea = Tarea::find($id);
+        return view('edit', compact('tarea'));
     }
 
     /**
@@ -76,14 +65,14 @@ class TareaController extends Controller
      */
     public function update(Request $request, $id)
     {
-    $tarea = Tarea::find($id);
+    $tareas = Tarea::find($id);
 
-    $tarea->titulo = $request->input('titulo');
-    $tarea->contenido = $request->input('contenido');
+    $tareas->titulo = $request->input('titulo');
+    $tareas->contenido = $request->input('contenido');
 
-    $tarea->save();
+    $tareas->save();
 
-    $tareas = Tarea::all();
+    $tarea = Tarea::all();
 
     return view('tareas',compact('tarea'));
 

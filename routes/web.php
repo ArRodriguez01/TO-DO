@@ -27,3 +27,4 @@ Route::get('/tarea', [TareaController::class, 'index'])->name('tarea.index');
 
 Route::get('/tarea/{id}', [TareaController::class, 'destroy'])->name('tarea.destroy');
 Route::get('/tarea/{id}/update', [TareaController::class, 'update'])->name('tarea.update');
+Route::get('/tarea/{id}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
